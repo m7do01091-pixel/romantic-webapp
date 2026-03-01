@@ -1,1 +1,168 @@
-   <!-- ملف HTML جاهز -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rehab ❤️ ملكة قلبي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cairo',sans-serif;background:linear-gradient(135deg,#000,#1a001a);color:#fff;text-align:center;overflow:hidden;}
+canvas{position:fixed;top:0;left:0;z-index:-2;}
+.login, .page{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;backdrop-filter:blur(15px);}
+.login-box{background:rgba(255,255,255,0.08);padding:40px;border-radius:20px;box-shadow:0 0 30px rgba(255,215,0,0.5);}
+input{padding:12px;border:none;border-radius:30px;text-align:center;font-size:18px;margin-top:15px;}
+button{margin-top:15px;padding:10px 25px;border:none;border-radius:30px;background:linear-gradient(45deg,#ffd700,#ff0066);color:white;font-size:16px;cursor:pointer;transition:0.4s;}
+button:hover{transform:scale(1.1);box-shadow:0 0 20px gold;}
+.buttons button.active{background:gold;color:black;}
+h1{font-size:40px;color:gold;text-shadow:0 0 20px gold;margin-bottom:10px;}
+img{width:180px;height:180px;border-radius:20px;margin:10px;box-shadow:0 0 25px #ff0066;cursor:pointer;transition:0.5s;}
+img:hover{transform:scale(1.1);}
+.heart,.rose,.confetti{position:fixed;animation:float 6s linear infinite;}
+.heart{color:#ff0066} .rose{color:#ff4d4d;} .confetti{color:#ffcc00;}
+@keyframes float{from{transform:translateY(100vh)} to{transform:translateY(-10vh)}}
+#msg{margin-top:20px;font-size:20px;opacity:0;transition:0.5s;}
+#proposalBox button{margin:10px;}
+.page{display:none;width:100%;height:100%;padding:20px;}
+.page h1{margin-top:50px;}
+.page button{return;}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+
+<!-- صفحة الدخول -->
+<div class="login" id="loginPage">
+  <div class="login-box">
+    <h2>🔐 ادخلي تاريخنا السرّي</h2>
+    <input type="password" id="pass" placeholder="دخلي الرمز ي ام عيالي">
+    <br>
+    <button onclick="login()">دخول ❤️</button>
+  </div>
+</div>
+
+<!-- الصفحة الرئيسية -->
+<div class="page" id="mainPage">
+  <h1 id="typing"></h1>
+  <h2 id="counter"></h2>
+
+  <div>
+    <img src="WhatsApp Image 2026-03-01 at .19.24 AM.jpeg" onclick="openPage('photo1')">
+    <img src="WhatsApp Image 2026-03-01 at 12.19.24 AM.jpeg" onclick="openPage('photo2')">
+    <img src="WhatsApp Image 2026-03-01 at 12.127 AM.jpeg" onclick="openPage('photo3')">
+    <img src="WhatsApp Image 2026-03-01 at 12.19. AM.jpeg" onclick="openPage('ramadan')">
+    <img src="WhatsApp Image 2003-01 at 12.19.28 AM.jpeg" onclick="openPage('eid')">
+  </div>
+
+  <div class="buttons">
+    <button onclick="selectBtn(this); showMsg('انتي قدري وأجمل اختيار ❤️')">رسالة حب</button>
+    <button onclick="selectBtn(this); showMsg('بحبك بعدد نجوم السما ✨')">رسالة اشتياق</button>
+    <button onclick="openProposal()">💍 تتجوزيني؟</button>
+  </div>
+  <h3 id="msg"></h3>
+  <div id="proposalBox" style="display:none; margin-top:20px;">
+    <button onclick="yes()">موافقة ❤️</button>
+    <button id="noBtn" onmouseover="moveNo()">بفكر 🤭</button>
+  </div>
+  <div id="proposal"></div>
+  <div id="yesScreen">🎉 SHE SAID YES! 🎉</div>
+  <audio autoplay loop controls>
+    <source src="music.mp3" type="audio/mp3">
+  </audio>
+</div>
+
+<!-- الصفحات الفرعية -->
+<div class="page" id="photo1">
+  <h1>🌹 كل لحظة معاكي كنز 💖</h1>
+  <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
+  <button onclick="showMsgPage('بحبك كل يوم أكتر ❤️')">رسالة حب</button>
+  <h3 id="msg1"></h3>
+</div>
+
+<div class="page" id="photo2">
+  <h1>✨ انتي فرحتي ودنياي كلها ❤️</h1>
+  <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
+  <button onclick="showMsgPage('معاك كل لحظة أحلى 💖')">رسالة حب جديدة</button>
+  <h3 id="msg2"></h3>
+</div>
+
+<div class="page" id="photo3">
+  <h1>انتي اجمل حلم ❤️✨</h1>
+  <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
+  <button onclick="showMsgPage('معاك الدنيا حلوة 💖')">رسالة اشتياق</button>
+  <h3 id="msg3"></h3>
+</div>
+
+<div class="page" id="ramadan">
+  <h1>🌙 رمضان كريم عليكي حبيبتي ❤️</h1>
+  <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
+</div>
+
+<div class="page" id="eid">
+  <h1>🎉 عيد سعيد مع أحلى قلب 💖</h1>
+  <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
+</div>
+
+<script>
+/* دخول */
+function login(){
+  if(document.getElementById("pass").value==="2082008"){
+    document.getElementById("loginPage").style.display="none";
+    document.getElementById("mainPage").style.display="flex";
+    typeWriter(); counter(); hearts(); roses();
+  }else{alert("التاريخ غلط 😢")}
+}
+
+/* كتابة */
+let text="Rehab ❤️ ملكة قلبي"; let i=0;
+function typeWriter(){if(i<text.length){document.getElementById("typing").innerHTML+=text[i]; i++; setTimeout(typeWriter,100);}}
+
+/* عداد حب */
+function counter(){let start=new Date("2008-08-20");
+setInterval(()=>{let now=new Date(); let diff=now-start;
+let d=Math.floor(diff/86400000); let h=Math.floor(diff/3600000%24);
+let m=Math.floor(diff/60000%60); let s=Math.floor(diff/1000%60);
+document.getElementById("counter").innerHTML=`مع بعض بقالنا ❤️<br>${d} يوم ${h} ساعة ${m} دقيقة ${s} ثانية`;},1000);}
+
+/* رسائل Fade */
+function selectBtn(btn){document.querySelectorAll('.buttons button').forEach(b=>b.classList.remove('active')); btn.classList.add('active');}
+function showMsg(t){let msg=document.getElementById("msg"); msg.style.opacity=0; setTimeout(()=>{msg.innerText=t; msg.style.opacity=1;},300);}
+function showMsgPage(t){
+  let msgs = ['msg1','msg2','msg3'];
+  msgs.forEach(id=>{let m=document.getElementById(id); if(m){m.style.opacity=0; setTimeout(()=>{m.innerText=t; m.style.opacity=1;},300);}});
+}
+
+/* تتجوزيني */
+function openProposal(){
+  document.getElementById("proposalBox").style.display="block";
+  document.getElementById("proposal").innerText = "🌹 رحلتنا تبدأ هنا، هل تكونين شريكة حياتي إلى الأبد؟ 💖";
+}
+function yes(){
+  document.getElementById("proposal").style.display="block";
+  document.getElementById("yesScreen").style.display="block";
+  hearts(); roses(); confetti();
+  playApplause();
+}
+function moveNo(){let btn=document.getElementById("noBtn"); btn.style.position="absolute"; btn.style.left=Math.random()*80+"vw"; btn.style.top=Math.random()*80+"vh";}
+
+/* قلوب وورود */
+function hearts(){setInterval(()=>{let h=document.createElement("div");h.className="heart";h.innerHTML="❤️";h.style.left=Math.random()*100+"vw";h.style.fontSize=Math.random()*40+20+"px";document.body.appendChild(h);setTimeout(()=>h.remove(),6000);},400);}
+function roses(){setInterval(()=>{let r=document.createElement("div");r.className="rose";r.innerHTML="🌹";r.style.left=Math.random()*100+"vw";r.style.fontSize=Math.random()*35+15+"px";document.body.appendChild(r);setTimeout(()=>r.remove(),6000);},600);}
+function confetti(){setInterval(()=>{let c=document.createElement("div");c.className="confetti";c.innerHTML="🎊";c.style.left=Math.random()*100+"vw";c.style.fontSize=Math.random()*25+10+"px";document.body.appendChild(c);setTimeout(()=>c.remove(),4000);},500);}
+function playApplause(){let audio=new Audio('https://www.soundjay.com/human/applause-8.mp3'); audio.play();}
+
+/* النجوم */
+let canvas=document.getElementById("stars"); let ctx=canvas.getContext("2d"); canvas.width=innerWidth; canvas.height=innerHeight;
+let stars=[]; for(let i=0;i<300;i++){stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2});}
+function draw(){ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle="white"; stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();}); requestAnimationFrame(draw);}
+draw();
+
+/* فتح الصفحات */
+function openPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+  document.getElementById(id).style.display='flex';
+}
+function goBack(){openPage('mainPage');}
+</script>
+</body>
+</html>
