@@ -24,6 +24,7 @@ img:hover{transform:scale(1.1);}
 #msg{margin-top:20px;font-size:20px;opacity:0;transition:0.5s;}
 #proposalBox button{margin:10px;}
 .page{display:none;width:100%;height:100%;padding:20px;}
+.page-content{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;}
 .page h1{margin-top:50px;}
 .page button{return;}
 </style>
@@ -43,64 +44,76 @@ img:hover{transform:scale(1.1);}
 
 <!-- الصفحة الرئيسية -->
 <div class="page" id="mainPage">
-  <h1 id="typing"></h1>
-  <h2 id="counter"></h2>
+  <div class="page-content">
+    <h1 id="typing"></h1>
+    <h2 id="counter"></h2>
 
-  <div>
-   <img src="https://i.ibb.co/NPnDz0d/b.jpg" onclick="openPage('photo1')">
-<img src="https://i.ibb.co/GqC6Pk3/e.jpg" onclick="openPage('photo2')">
-<img src="https://i.ibb.co/9mLGtTPg/r.jpg" onclick="openPage('photo3')">
-<img src="https://i.ibb.co/9H3RHgKH/rb.jpg" onclick="openPage('ramadan')">
-<img src="https://i.ibb.co/Yg2zh22/re.jpg" onclick="openPage('eid')">
-  </div>
+    <div>
+      <img src="https://i.ibb.co/NPnDz0d/b.jpg" onclick="openPage('photo1')">
+      <img src="https://i.ibb.co/GqC6Pk3/e.jpg" onclick="openPage('photo2')">
+      <img src="https://i.ibb.co/9mLGtTPg/r.jpg" onclick="openPage('photo3')">
+      <img src="https://i.ibb.co/9H3RHgKH/rb.jpg" onclick="openPage('ramadan')">
+      <img src="https://i.ibb.co/Yg2zh22/re.jpg" onclick="openPage('eid')">
+    </div>
 
-  <div class="buttons">
-    <button onclick="selectBtn(this); showMsg('انتي قدري وأجمل اختيار ❤️')">رسالة حب</button>
-    <button onclick="selectBtn(this); showMsg('بحبك بعدد نجوم السما ✨')">رسالة اشتياق</button>
-    <button onclick="openProposal()">💍 تتجوزيني؟</button>
+    <div class="buttons">
+      <button onclick="selectBtn(this); showMsg('انتي قدري وأجمل اختيار ❤️')">رسالة حب</button>
+      <button onclick="selectBtn(this); showMsg('بحبك بعدد نجوم السما ✨')">رسالة اشتياق</button>
+      <button onclick="openProposal()">💍 تتجوزيني؟</button>
+    </div>
+    <h3 id="msg"></h3>
+    <div id="proposalBox" style="display:none; margin-top:20px;">
+      <button onclick="yes()">موافقة ❤️</button>
+      <button id="noBtn" onmouseover="moveNo()">بفكر 🤭</button>
+    </div>
+    <div id="proposal"></div>
+    <div id="yesScreen">🎉 SHE SAID YES! 🎉</div>
+    <audio autoplay loop controls>
+      <source src="music.mp3" type="audio/mp3">
+    </audio>
   </div>
-  <h3 id="msg"></h3>
-  <div id="proposalBox" style="display:none; margin-top:20px;">
-    <button onclick="yes()">موافقة ❤️</button>
-    <button id="noBtn" onmouseover="moveNo()">بفكر 🤭</button>
-  </div>
-  <div id="proposal"></div>
-  <div id="yesScreen">🎉 SHE SAID YES! 🎉</div>
-  <audio autoplay loop controls>
-    <source src="music.mp3" type="audio/mp3">
-  </audio>
 </div>
 
 <!-- الصفحات الفرعية -->
 <div class="page" id="photo1">
-  <h1>🌹 كل لحظة معاكي كنز 💖</h1>
-  <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
-  <button onclick="showMsgPage('بحبك كل يوم أكتر ❤️')">رسالة حب</button>
-  <h3 id="msg1"></h3>
+  <div class="page-content">
+    <h1>🌹 كل لحظة معاكي كنز 💖</h1>
+    <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
+    <button onclick="showMsgPage('بحبك كل يوم أكتر ❤️')">رسالة حب</button>
+    <h3 id="msg1"></h3>
+  </div>
 </div>
 
 <div class="page" id="photo2">
-  <h1>✨ انتي فرحتي ودنياي كلها ❤️</h1>
-  <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
-  <button onclick="showMsgPage('معاك كل لحظة أحلى 💖')">رسالة حب جديدة</button>
-  <h3 id="msg2"></h3>
+  <div class="page-content">
+    <h1>✨ انتي فرحتي ودنياي كلها ❤️</h1>
+    <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
+    <button onclick="showMsgPage('معاك كل لحظة أحلى 💖')">رسالة حب جديدة</button>
+    <h3 id="msg2"></h3>
+  </div>
 </div>
 
 <div class="page" id="photo3">
-  <h1>انتي اجمل حلم ❤️✨</h1>
-  <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
-  <button onclick="showMsgPage('معاك الدنيا حلوة 💖')">رسالة اشتياق</button>
-  <h3 id="msg3"></h3>
+  <div class="page-content">
+    <h1>انتي اجمل حلم ❤️✨</h1>
+    <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
+    <button onclick="showMsgPage('معاك الدنيا حلوة 💖')">رسالة اشتياق</button>
+    <h3 id="msg3"></h3>
+  </div>
 </div>
 
 <div class="page" id="ramadan">
-  <h1>🌙 رمضان كريم عليكي حبيبتي ❤️</h1>
-  <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
+  <div class="page-content">
+    <h1>🌙 رمضان كريم عليكي حبيبتي ❤️</h1>
+    <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
+  </div>
 </div>
 
 <div class="page" id="eid">
-  <h1>🎉 عيد سعيد مع أحلى قلب 💖</h1>
-  <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
+  <div class="page-content">
+    <h1>🎉 عيد سعيد مع أحلى قلب 💖</h1>
+    <button onclick="goBack()">💌 ارجع للصفحة الرئيسية</button>
+  </div>
 </div>
 
 <script>
@@ -108,7 +121,7 @@ img:hover{transform:scale(1.1);}
 function login(){
   if(document.getElementById("pass").value==="2082008"){
     document.getElementById("loginPage").style.display="none";
-    document.getElementById("mainPage").style.display="flex";
+    document.getElementById("mainPage").style.display="block";
     typeWriter(); counter(); hearts(); roses();
   }else{alert("التاريخ غلط 😢")}
 }
@@ -159,8 +172,8 @@ draw();
 
 /* فتح الصفحات */
 function openPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.style.display='none');
-  document.getElementById(id).style.display='flex';
+  document.querySelectorAll('.page').forEach(p => p.style.display='none');
+  document.getElementById(id).style.display='block'; // نعرض الصفحة
 }
 function goBack(){openPage('mainPage');}
 </script>
